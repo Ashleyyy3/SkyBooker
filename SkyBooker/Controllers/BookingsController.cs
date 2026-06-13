@@ -59,5 +59,52 @@ namespace SkyBooker.Controllers
 
             return Ok(response);
         }
+
+        //Shows all bookings for a specific email address
+        [HttpGet("by-email")]
+        public async Task<ActionResult<List<BookingResponseDto>>> GetBookingsByEmail(string email)
+        {
+            var bookings = await _context.Bookings
+                .Where(b => b.PassengerEmail.ToLower() == email.ToLower())
+                .Select(b => new BookingResponseDto
+                {
+                    Id = b.Id,
+                    FlightId = b.FlightId,
+                    PassengerName = b.PassengerName,
+                    PassengerEmail = b.PassengerEmail,
+                    BookingDate = b.BookingDate
+                })
+                .ToListAsync();
+
+            return Ok(bookings);
+        }
+
+        //Cancel bookings
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteBooking(int id)
+        {
+            var booking = await _context.Bookings
+                .FirstOrDefaultAsync(b => b.Id == id);
+
+            if (booking == null)
+            {
+                return NotFound("Booking not found.");
+            }
+
+            var flight = await _context.Flights
+                .FirstOrDefaultAsync(f => f.Id == booking.FlightId);
+
+            if (flight != null)
+            {
+                flight.AvailableSeats++;
+            }
+
+            _context.Bookings.Remove(booking);
+
+            await _context.SaveChangesAsync();
+
+            return Ok("Booking cancelled successfully.");
+        }
     }
 }
