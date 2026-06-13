@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SkyBooker.Data;
+using SkyBooker.Models;
 
 namespace SkyBooker
 {
@@ -35,6 +36,42 @@ namespace SkyBooker
 
             app.MapControllers();
 
+            using (var scope = app.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+                if (!context.Flights.Any()) //does the flight table contain at least one row.IF FALSE flights in database, then add some flights
+                {
+                    context.Flights.AddRange(
+                        new Flight
+                        {
+                            From = "Stockholm",
+                            To = "London",
+                            DepartureTime = new DateTime(2026, 7, 1, 8, 30, 0),
+                            Price = 1299,
+                            AvailableSeats = 50
+                        },
+                        new Flight
+                        {
+                            From = "Gothenburg",
+                            To = "Paris",
+                            DepartureTime = new DateTime(2026, 7, 2, 10, 0, 0),
+                            Price = 1599,
+                            AvailableSeats = 35
+                        },
+                        new Flight
+                        {
+                            From = "Malmö",
+                            To = "Rome",
+                            DepartureTime = new DateTime(2026, 7, 3, 14, 45, 0),
+                            Price = 1899,
+                            AvailableSeats = 20
+                        }
+                    );
+
+                    context.SaveChanges();
+                }
+            }
             app.Run();
         }
     }
