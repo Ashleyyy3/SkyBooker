@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SkyBooker.Data;
+using SkyBooker.DTOs;
 using SkyBooker.Models;
+using SkyBooker.DTOs;
 
 namespace SkyBooker.Controllers
 {
@@ -17,12 +19,12 @@ namespace SkyBooker.Controllers
         }
 
         [HttpPost] // Creates data
-        public async Task<ActionResult<Booking>> CreateBooking(Booking booking) //creates a booking
+        public async Task<ActionResult<BookingResponseDto>> CreateBooking(CreateBookingDto dto)
         {
             var flight = await _context.Flights
-                .FirstOrDefaultAsync(f => f.Id == booking.FlightId);
+                .FirstOrDefaultAsync(f => f.Id == dto.FlightId);
 
-            if (flight == null) // checks for available seats on the flight and if the flight exists
+            if (flight == null)
             {
                 return NotFound("Flight not found.");
             }
@@ -32,21 +34,30 @@ namespace SkyBooker.Controllers
                 return BadRequest("No available seats on this flight.");
             }
 
+            var booking = new Booking
+            {
+                FlightId = dto.FlightId,
+                PassengerName = dto.PassengerName,
+                PassengerEmail = dto.PassengerEmail,
+                BookingDate = DateTime.Now
+            };
+
             flight.AvailableSeats--;
 
-            _context.Bookings.Add(booking); //saves to SQL and returns the saved booking
+            _context.Bookings.Add(booking);
 
             await _context.SaveChangesAsync();
 
-            return Ok(booking);
-        }
+            var response = new BookingResponseDto
+            {
+                Id = booking.Id,
+                FlightId = booking.FlightId,
+                PassengerName = booking.PassengerName,
+                PassengerEmail = booking.PassengerEmail,
+                BookingDate = booking.BookingDate
+            };
 
-        [HttpGet]
-        public async Task<ActionResult<List<Booking>>> GetBookings()
-        {
-            var bookings = await _context.Bookings.ToListAsync();
-
-            return Ok(bookings);
+            return Ok(response);
         }
     }
 }
