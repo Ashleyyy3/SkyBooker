@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyBooker</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+    <header class="hero">
+
+        <nav class="navbar">
+            <div class="logo">
+                <i class="bi bi-airplane"></i>
+                <span>SkyBooker</span>
+            </div>
+
+            <div class="nav-links">
+                <a href="index.html">Flights</a>
+                <a href="flights.html">Search</a>
+                <a href="#">My Bookings</a>
+            </div>
+        </nav>
+
+        <div class="hero-content">
+            <h1>Fly smarter across Europe</h1>
+            <p>Search, book and manage your flights through one simple platform.</p>
+        </div>
+
+    </header>
+
+    <main>
+        <section class="search-card">
+
+            <div class="tabs">
+                <button class="active">
+                    <i class="bi bi-airplane"></i>
+                    Book a flight
+                </button>
+
+                <button>
+                    <i class="bi bi-calendar-check"></i>
+                    Manage booking
+                </button>
+
+                <button>
+                    <i class="bi bi-clock"></i>
+                    Flight status
+                </button>
+            </div>
+
+            <div class="trip-options">
+                <label>
+                    <input type="radio" name="trip" checked>
+                    One way
+                </label>
+
+                <label>
+                    <input type="radio" name="trip">
+                    Return
+                </label>
+            </div>
+
+            <div class="search-fields">
+                <input type="text" id="from" placeholder="Departure city">
+                <input type="text" id="to" placeholder="Destination city">
+                <input type="date" id="date">
+
+                <button id="searchBtn">
+                    Search flights
+                </button>
+            </div>
+
+        </section>
+    </main>
+
+
+
+
+    <script src="flights.js"></script>
+
+</body>
+</html>

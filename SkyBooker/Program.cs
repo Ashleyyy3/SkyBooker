@@ -33,6 +33,10 @@ namespace SkyBooker
 
             app.UseAuthorization();
 
+            //Let's localhost load html
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
 
             app.MapControllers();
 

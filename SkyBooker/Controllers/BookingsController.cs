@@ -79,6 +79,30 @@ namespace SkyBooker.Controllers
             return Ok(bookings);
         }
 
+        //Checks email and booking ID to show the booking details for managing (cancelling) the booking.
+        [HttpGet("manage")]
+        public async Task<ActionResult<BookingResponseDto>> GetBookingForManage(string email, int bookingId)
+        {
+            var booking = await _context.Bookings
+                .Where(b => b.PassengerEmail.ToLower() == email.ToLower() && b.Id == bookingId)
+                .Select(b => new BookingResponseDto
+                {
+                    Id = b.Id,
+                    FlightId = b.FlightId,
+                    PassengerName = b.PassengerName,
+                    PassengerEmail = b.PassengerEmail,
+                    BookingDate = b.BookingDate
+                })
+                .FirstOrDefaultAsync();
+
+            if (booking == null)
+            {
+                return NotFound("No booking found with that email and booking ID.");
+            }
+
+            return Ok(booking);
+        }
+
         //Cancel bookings
 
         [HttpDelete("{id}")]
