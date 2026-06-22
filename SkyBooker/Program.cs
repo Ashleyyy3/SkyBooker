@@ -43,36 +43,38 @@ namespace SkyBooker
             using (var scope = app.Services.CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                context.Database.EnsureCreated();
 
-                if (!context.Flights.Any()) //does the flight table contain at least one row.IF FALSE flights in database, then add some flights
+                if (!context.Flights.Any())
                 {
                     context.Flights.AddRange(
-                        new Flight
-                        {
-                            From = "Stockholm",
-                            To = "London",
-                            DepartureTime = new DateTime(2026, 7, 1, 8, 30, 0),
-                            Price = 1299,
-                            AvailableSeats = 50
-                        },
-                        new Flight
-                        {
-                            From = "Gothenburg",
-                            To = "Paris",
-                            DepartureTime = new DateTime(2026, 7, 2, 10, 0, 0),
-                            Price = 1599,
-                            AvailableSeats = 35
-                        },
-                        new Flight
-                        {
-                            From = "Malmö",
-                            To = "Rome",
-                            DepartureTime = new DateTime(2026, 7, 3, 14, 45, 0),
-                            Price = 1899,
-                            AvailableSeats = 20
-                        }
-                    );
+                        // Stockholm ? London
+                        new Flight { From = "Stockholm", To = "London", DepartureTime = new DateTime(2026, 7, 1, 8, 30, 0), Price = 1299, AvailableSeats = 48 },
+                        new Flight { From = "Stockholm", To = "London", DepartureTime = new DateTime(2026, 7, 1, 12, 15, 0), Price = 1499, AvailableSeats = 35 },
+                        new Flight { From = "Stockholm", To = "London", DepartureTime = new DateTime(2026, 7, 1, 18, 45, 0), Price = 999, AvailableSeats = 22 },
+                        new Flight { From = "Stockholm", To = "London", DepartureTime = new DateTime(2026, 7, 2, 9, 0, 0), Price = 1399, AvailableSeats = 40 },
+                        new Flight { From = "Stockholm", To = "London", DepartureTime = new DateTime(2026, 7, 3, 16, 20, 0), Price = 1199, AvailableSeats = 30 },
 
+                        // Gothenburg ? Paris
+                        new Flight { From = "Gothenburg", To = "Paris", DepartureTime = new DateTime(2026, 7, 1, 7, 45, 0), Price = 1599, AvailableSeats = 50 },
+                        new Flight { From = "Gothenburg", To = "Paris", DepartureTime = new DateTime(2026, 7, 1, 14, 30, 0), Price = 1349, AvailableSeats = 28 },
+                        new Flight { From = "Gothenburg", To = "Paris", DepartureTime = new DateTime(2026, 7, 2, 11, 0, 0), Price = 1449, AvailableSeats = 42 },
+
+                        // Malmö ? Rome
+                        new Flight { From = "Malmö", To = "Rome", DepartureTime = new DateTime(2026, 7, 1, 6, 15, 0), Price = 1799, AvailableSeats = 33 },
+                        new Flight { From = "Malmö", To = "Rome", DepartureTime = new DateTime(2026, 7, 1, 15, 0, 0), Price = 1649, AvailableSeats = 45 },
+                        new Flight { From = "Malmö", To = "Rome", DepartureTime = new DateTime(2026, 7, 3, 9, 30, 0), Price = 1899, AvailableSeats = 20 },
+
+                        // Stockholm ? Barcelona
+                        new Flight { From = "Stockholm", To = "Barcelona", DepartureTime = new DateTime(2026, 7, 1, 10, 0, 0), Price = 1699, AvailableSeats = 38 },
+                        new Flight { From = "Stockholm", To = "Barcelona", DepartureTime = new DateTime(2026, 7, 1, 17, 30, 0), Price = 1449, AvailableSeats = 52 },
+                        new Flight { From = "Stockholm", To = "Barcelona", DepartureTime = new DateTime(2026, 7, 2, 8, 0, 0), Price = 1549, AvailableSeats = 29 },
+
+                        // Copenhagen ? Amsterdam
+                        new Flight { From = "Copenhagen", To = "Amsterdam", DepartureTime = new DateTime(2026, 7, 1, 9, 15, 0), Price = 899, AvailableSeats = 60 },
+                        new Flight { From = "Copenhagen", To = "Amsterdam", DepartureTime = new DateTime(2026, 7, 1, 13, 45, 0), Price = 749, AvailableSeats = 44 },
+                        new Flight { From = "Copenhagen", To = "Amsterdam", DepartureTime = new DateTime(2026, 7, 2, 16, 0, 0), Price = 849, AvailableSeats = 37 }
+                    );
                     context.SaveChanges();
                 }
             }
