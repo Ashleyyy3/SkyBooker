@@ -3,30 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flights | SkyBooker</title>
+    <title>Search Results | SkyBooker</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        .logo {
+            color: white !important;
+            text-decoration: none !important;
+        }
+
+            .logo i {
+                color: white !important;
+            }
+
+            .logo span {
+                color: white !important;
+            }
+    </style>
 </head>
 <body>
-
     <nav class="navbar dark-nav">
-        <div class="logo">
+        <a href="index.html" class="logo">
             <i class="bi bi-airplane-fill"></i>
             <span>SkyBooker</span>
-        </div>
-
+        </a>
         <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="flights.html">Flights</a>
-            <a href="#">My Bookings</a>
+            <a href="index.html">Search Flights</a>
+            <a href="bookings.html">My Bookings</a>
         </div>
     </nav>
 
     <main class="page-container">
-        <h1>Available Flights</h1>
-        <p class="page-subtitle">Choose a flight and complete your booking.</p>
-
+        <div class="results-header">
+            <div>
+                <h1>Search Results</h1>
+                <p class="page-subtitle" id="searchSummary"></p>
+            </div>
+            <span class="flight-count" id="flightCount"></span>
+        </div>
         <div id="flightsContainer" class="flights-grid"></div>
     </main>
+
+    <!-- Booking Modal -->
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeBookingModal()"><i class="bi bi-x-lg"></i></button>
+            <h2>Book Flight</h2>
+            <p class="modal-route" id="modalRoute"></p>
+            <p class="modal-price" id="modalPrice"></p>
+            <input type="hidden" id="modalFlightId">
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label>Full name</label>
+                    <input type="text" id="passengerName" placeholder="Your full name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email address</label>
+                    <input type="email" id="passengerEmail" placeholder="your@email.com" required>
+                </div>
+                <p class="error-msg" id="bookingError"></p>
+                <button type="submit" class="submit-btn">Confirm booking</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal-overlay" id="confirmationModal">
+        <div class="modal modal-confirm">
+            <i class="bi bi-check-circle-fill confirm-icon"></i>
+            <h2>Booking Confirmed!</h2>
+            <p>Your booking reference is:</p>
+            <div class="booking-ref-display" id="confirmRef"></div>
+            <p class="confirm-email">A confirmation has been sent to <strong id="confirmEmail"></strong></p>
+            <button class="submit-btn" onclick="closeConfirmation()">Done</button>
+            <a href="bookings.html" class="view-bookings-link">View my bookings</a>
+        </div>
+    </div>
 
     <script src="flights.js"></script>
 </body>

@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings | SkyBooker</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        .logo {
+            color: white !important;
+            text-decoration: none !important;
+        }
+
+            .logo i {
+                color: white !important;
+            }
+
+            .logo span {
+                color: white !important;
+            }
+    </style>
+</head>
+<body>
+    <nav class="navbar dark-nav">
+        <a href="index.html" class="logo">
+            <i class="bi bi-airplane-fill"></i>
+            <span>SkyBooker</span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html">Search Flights</a>
+            <a href="bookings.html">My Bookings</a>
+        </div>
+    </nav>
+
+    <main class="page-container">
+        <h1>My Bookings</h1>
+        <p class="page-subtitle">Enter your email to find your bookings.</p>
+
+        <div class="booking-search-box">
+            <input type="email" id="bookingEmail" placeholder="your@email.com">
+            <button id="bookingSearchBtn">Find bookings</button>
+        </div>
+
+        <div id="bookingsResults"></div>
+    </main>
+
+    <script src="flights.js"></script>
+</body>
+</html>

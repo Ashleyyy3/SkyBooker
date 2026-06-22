@@ -12,7 +12,7 @@ body {
 
 .hero {
     min-height: 520px;
-    background: linear-gradient( rgba(7,24,39,0.55), rgba(7,24,39,0.55) ), url("assets/Grekland.jpg");
+    background: linear-gradient(rgba(7,24,39,0.55), rgba(7,24,39,0.55)), url("assets/Grekland.jpg");
     background-size: cover;
     background-position: center;
     color: white;
@@ -34,10 +34,17 @@ body {
     gap: 10px;
     font-size: 1.6rem;
     font-weight: 700;
+    color: white !important;
+    text-decoration: none !important;
 }
 
     .logo i {
         font-size: 2rem;
+        color: white !important;
+    }
+
+    .logo span {
+        color: white !important;
     }
 
 .nav-links {
@@ -48,11 +55,12 @@ body {
     .nav-links a {
         color: white;
         text-decoration: none;
-        font-weight: 500;
+        font-weight: 600;
+        transition: 0.2s;
     }
 
         .nav-links a:hover {
-            text-decoration: underline;
+            opacity: 0.8;
         }
 
 .hero-content {
@@ -157,61 +165,6 @@ body {
             background: #1D4ED8;
         }
 
-/* Responsive */
-@media(max-width:900px) {
-    .hero-content h1 {
-        font-size: 2.6rem;
-    }
-
-    .search-fields {
-        grid-template-columns: 1fr;
-    }
-
-    .tabs {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media(max-width:600px) {
-    .navbar {
-        flex-direction: column;
-        gap: 18px;
-    }
-
-    .nav-links {
-        gap: 18px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .hero {
-        min-height: 560px;
-    }
-
-    .hero-content {
-        margin-top: 70px;
-        text-align: center;
-    }
-
-        .hero-content h1 {
-            font-size: 2.2rem;
-        }
-
-        .hero-content p {
-            font-size: 1rem;
-        }
-
-    .search-card {
-        margin: -70px 16px 40px;
-    }
-
-    .trip-options {
-        flex-direction: column;
-        gap: 12px;
-    }
-}
-
-
 .dark-nav {
     background: #071827;
     max-width: none;
@@ -269,9 +222,399 @@ body {
     cursor: pointer;
 }
 
-@media(max-width:700px) {
+    .flight-card button:hover {
+        background: #1D4ED8;
+    }
+
+/* Responsive */
+
+@media (max-width: 900px) {
+    .hero-content h1 {
+        font-size: 2.6rem;
+    }
+
+    .search-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .tabs {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
     .flight-card {
         flex-direction: column;
         align-items: flex-start;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .nav-links {
+        gap: 18px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero {
+        min-height: 560px;
+    }
+
+    .hero-content {
+        margin-top: 70px;
+        text-align: center;
+    }
+
+        .hero-content h1 {
+            font-size: 2.2rem;
+        }
+
+        .hero-content p {
+            font-size: 1rem;
+        }
+
+    .search-card {
+        margin: -70px 16px 40px;
+    }
+
+    .trip-options {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+
+
+/* ── Results header ── */
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 28px;
+}
+
+.flight-count {
+    background: #EFF6FF;
+    color: #2563EB;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 6px 16px;
+    border-radius: 20px;
+}
+
+/* ── Flight cards ── */
+.flight-card-left {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.flight-number {
+    font-size: 0.85rem;
+    color: #64748B;
+    font-weight: 500;
+}
+
+.flight-route {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0F172A;
+}
+
+    .flight-route .route-line {
+        color: #2563EB;
+    }
+
+.flight-meta {
+    display: flex;
+    gap: 20px;
+    font-size: 0.9rem;
+    color: #64748B;
+}
+
+    .flight-meta span {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+.flight-card-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.flight-price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #0F172A;
+}
+
+    .flight-price span {
+        font-size: 1rem;
+        font-weight: 400;
+        color: #64748B;
+    }
+
+.book-btn {
+    background: #2563EB;
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+    .book-btn:hover {
+        background: #1D4ED8;
+    }
+
+/* ── No results ── */
+.no-results {
+    text-align: center;
+    padding: 60px 20px;
+    color: #64748B;
+}
+
+    .no-results i {
+        font-size: 3rem;
+        display: block;
+        margin-bottom: 16px;
+    }
+
+    .no-results a {
+        color: #2563EB;
+        font-weight: 600;
+    }
+
+/* ── Modal ── */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(7, 24, 39, 0.6);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+}
+
+    .modal-overlay.active {
+        display: flex;
+    }
+
+.modal {
+    background: white;
+    border-radius: 18px;
+    padding: 40px;
+    width: 100%;
+    max-width: 460px;
+    position: relative;
+}
+
+    .modal h2 {
+        font-size: 1.5rem;
+        margin-bottom: 6px;
+    }
+
+.modal-route {
+    color: #64748B;
+    margin-bottom: 4px;
+}
+
+.modal-price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2563EB;
+    margin-bottom: 24px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #64748B;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+    .form-group label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #334155;
+    }
+
+    .form-group input {
+        padding: 12px 14px;
+        border: 1px solid #CBD5E1;
+        border-radius: 10px;
+        font-size: 1rem;
+    }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #2563EB;
+        }
+
+.submit-btn {
+    width: 100%;
+    background: #2563EB;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+    .submit-btn:hover {
+        background: #1D4ED8;
+    }
+
+.error-msg {
+    color: #DC2626;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+/* ── Confirmation modal ── */
+.modal-confirm {
+    text-align: center;
+}
+
+.confirm-icon {
+    font-size: 3rem;
+    color: #16A34A;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.booking-ref-display {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #2563EB;
+    background: #EFF6FF;
+    padding: 14px;
+    border-radius: 10px;
+    margin: 12px 0 16px;
+}
+
+.confirm-email {
+    color: #64748B;
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+}
+
+.view-bookings-link {
+    display: block;
+    margin-top: 14px;
+    color: #2563EB;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* ── Bookings page ── */
+.booking-search-box {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 40px;
+    max-width: 500px;
+}
+
+    .booking-search-box input {
+        flex: 1;
+        padding: 14px;
+        border: 1px solid #CBD5E1;
+        border-radius: 10px;
+        font-size: 1rem;
+    }
+
+    .booking-search-box button {
+        background: #2563EB;
+        color: white;
+        border: none;
+        padding: 14px 24px;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+    }
+
+.booking-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 8px 24px rgba(15,23,42,0.10);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 16px;
+}
+
+.booking-ref {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2563EB;
+    letter-spacing: 1px;
+    min-width: 130px;
+}
+
+.booking-info {
+    flex: 1;
+    color: #475569;
+    line-height: 1.8;
+}
+
+.cancel-btn {
+    background: white;
+    color: #DC2626;
+    border: 1.5px solid #DC2626;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+    .cancel-btn:hover {
+        background: #FEF2F2;
+    }
+
+@media (max-width: 700px) {
+    .booking-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .flight-card-right {
+        align-items: flex-start;
+    }
+
+    .results-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
     }
 }

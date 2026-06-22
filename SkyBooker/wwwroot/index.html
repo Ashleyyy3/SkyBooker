@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkyBooker</title>
 
+    <!--CSS isn't loading properly in the browser, Change soon -->
+    <style>
+        .logo {
+            color: white !important;
+            text-decoration: none !important;
+        }
+
+            .logo i {
+                color: white !important;
+            }
+
+            .logo span {
+                color: white !important;
+            }
+    </style>
+
     <link rel="stylesheet" href="style.css">
 
     <link rel="stylesheet"
@@ -15,16 +31,17 @@
     <header class="hero">
 
         <nav class="navbar">
-            <div class="logo">
-                <i class="bi bi-airplane"></i>
+
+            <a href="index.html" class="logo">
+                <i class="bi bi-airplane-fill"></i>
                 <span>SkyBooker</span>
-            </div>
+            </a>
 
             <div class="nav-links">
-                <a href="index.html">Flights</a>
-                <a href="flights.html">Search</a>
-                <a href="#">My Bookings</a>
+                <a href="index.html">Search Flights</a>
+                <a href="bookings.html">My Bookings</a>
             </div>
+
         </nav>
 
         <div class="hero-content">
