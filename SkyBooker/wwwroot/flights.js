@@ -56,34 +56,129 @@ async function loadFlights() {
         }
 
         flights.forEach(flight => {
+
+        //This calculates the arravial time, duration, correct airline flight no and weather the flight is direct
             const dep = new Date(flight.departureTime);
-            const depTime = dep.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
-            const depDate = dep.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
-            const flightNum = "SK" + String(flight.id).padStart(4, "0");
+            const arr = new Date(flight.arrivalTime);
+
+            const depTime = dep.toLocaleTimeString("en-GB", {
+                hour: "2-digit",
+                minute: "2-digit"
+            });
+
+            const arrTime = arr.toLocaleTimeString("en-GB", {
+                hour: "2-digit",
+                minute: "2-digit"
+            });
+
+            const depDate = dep.toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "short",
+                year: "numeric"
+            });
+
+            const flightNum =
+                flight.airlineCode + String(flight.id).padStart(4, "0");
+
+            const durationMinutes = Math.round((arr - dep) / 60000);
+
+            const duration =
+                `${Math.floor(durationMinutes / 60)}h ${durationMinutes % 60}m`;
+
+            const stops =
+                flight.stops === 0
+                    ? "Direct"
+                    : `${flight.stops} stop${flight.stops > 1 ? "s" : ""}`;
 
             const card = document.createElement("div");
             card.className = "flight-card";
             card.innerHTML = `
-                <div class="flight-card-left">
-                    <div class="flight-number"><i class="bi bi-airplane-fill"></i> ${flightNum}</div>
-                    <div class="flight-route">
-                        <span class="city">${flight.from}</span>
-                        <span class="route-line"><i class="bi bi-arrow-right"></i></span>
-                        <span class="city">${flight.to}</span>
-                    </div>
-                    <div class="flight-meta">
-                        <span><i class="bi bi-clock"></i> ${depTime}</span>
-                        <span><i class="bi bi-calendar3"></i> ${depDate}</span>
-                        <span><i class="bi bi-person-seat"></i> ${flight.availableSeats} seats left</span>
-                    </div>
+    <div class="flight-card-left">
+
+        <div class="airline-row">
+            <div class="airline-badge">
+                ${flight.airlineCode}
+            </div>
+
+            <div>
+                <strong class="airline-name">
+                    ${flight.airline}
+                </strong>
+
+                <div class="flight-number">
+                    ${flightNum}
                 </div>
-                <div class="flight-card-right">
-                    <div class="flight-price">${flight.price} <span>SEK</span></div>
-                    <button class="book-btn" onclick="openBookingModal(${flight.id}, '${flight.from}', '${flight.to}', '${depTime}', ${flight.price})">
-                        Book flight
-                    </button>
+            </div>
+        </div>
+
+        <div class="comparison-route">
+
+            <div class="route-point">
+                <span class="route-time">${depTime}</span>
+                <span class="airport-code">
+                    ${flight.departureAirportCode}
+                </span>
+            </div>
+
+            <div class="journey-summary">
+                <span>${duration}</span>
+
+                <div class="journey-line">
+                    <i class="bi bi-airplane"></i>
                 </div>
-            `;
+
+                <span class="${flight.stops === 0 ? "direct" : "has-stops"}">
+                    ${stops}
+                </span>
+            </div>
+
+            <div class="route-point">
+                <span class="route-time">${arrTime}</span>
+                <span class="airport-code">
+                    ${flight.arrivalAirportCode}
+                </span>
+            </div>
+
+        </div>
+
+        <div class="flight-meta">
+            <span>
+                <i class="bi bi-calendar3"></i>
+                ${depDate}
+            </span>
+
+            <span>
+                ${flight.from} to ${flight.to}
+            </span>
+        </div>
+
+    </div>
+
+    <div class="flight-card-right">
+
+        <div class="provider-label">
+            Deal from ${flight.provider}
+        </div>
+
+        <div class="flight-price">
+            ${flight.price}
+            <span>SEK</span>
+        </div>
+
+        <a
+            class="book-btn deal-btn"
+            href="${flight.bookingUrl}"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            View deal
+            <i class="bi bi-box-arrow-up-right"></i>
+        </a>
+
+    </div>
+   
+`;
+
             flightsContainer.appendChild(card);
         });
 

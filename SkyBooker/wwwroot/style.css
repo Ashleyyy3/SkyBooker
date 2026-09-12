@@ -618,3 +618,99 @@ body {
         gap: 12px;
     }
 }
+
+/* Flight comparison design */
+
+.airline-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.airline-badge {
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    background: #eff6ff;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.airline-name {
+    font-size: 1rem;
+}
+
+.comparison-route {
+    display: grid;
+    grid-template-columns: auto minmax(150px, 1fr) auto;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 15px;
+}
+
+.route-point {
+    display: flex;
+    flex-direction: column;
+}
+
+.route-time {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.airport-code {
+    color: #64748b;
+    font-weight: 600;
+}
+
+.journey-summary {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+.journey-line {
+    border-bottom: 1px solid #cbd5e1;
+    height: 12px;
+    margin-bottom: 7px;
+    color: #94a3b8;
+}
+
+.direct {
+    color: #059669;
+}
+
+.has-stops {
+    color: #d97706;
+}
+
+.provider-label {
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+.deal-btn {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+}
+
+@media (max-width: 700px) {
+    .comparison-route {
+        grid-template-columns: auto 1fr auto;
+        gap: 10px;
+    }
+
+    .flight-card-right {
+        width: 100%;
+        align-items: stretch;
+        text-align: left;
+    }
+}
